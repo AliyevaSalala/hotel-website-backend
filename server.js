@@ -6,6 +6,7 @@ const productRouter = require("./routes/productRoutes.js");
 const reservationRouter = require("./routes/reservationRoutes.js");
 const menuRouter = require("./routes/menuRoutes.js");
 const authRoutes = require("./routes/authRoutes.js");
+const reviewRoutes = require("./routes/reviewRoutes");
 
 require("dotenv").config();
 const app = express();
@@ -22,6 +23,7 @@ app.use("/reservations", reservationRouter);
 app.use("/menu", menuRouter);
 app.use("/products", productRouter);
 app.use("/", authRoutes);
+app.use("/reviews", reviewRoutes);
 mongoose
   .connect(DB)
   .then(() => {
