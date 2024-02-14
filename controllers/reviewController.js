@@ -20,7 +20,23 @@ const submitReview = async (req, res) => {
   }
 };
 
+const deleteCommentById = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const deletedProduct = await Review.findByIdAndDelete(id);
+    const products = await Review.find({});
+    res.status(200).json({
+      message: "success",
+      deletedProduct: deletedProduct,
+      allProducts: products,
+    });
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+};
+
 module.exports = {
+  deleteCommentById,
   getAllProducts,
   submitReview,
 };
