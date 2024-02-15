@@ -1,6 +1,5 @@
 const Reservation = require("../models/reservation");
 
-
 const getAllReservations = async (req, res) => {
   try {
     const reservations = await Reservation.find({});
@@ -19,6 +18,18 @@ const addNewRezervations = async (req, res) => {
       message: "created succesfully!",
       data: newRezerv,
     });
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+};
+
+// BY ID
+
+const getReservationById = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const product = await Reservation.findById(id);
+    res.send(product).status(200);
   } catch (error) {
     res.status(500).send({ message: error.message });
   }
@@ -60,4 +71,5 @@ module.exports = {
   addNewRezervations,
   deleteProductById,
   updateProductById,
+  getReservationById,
 };
